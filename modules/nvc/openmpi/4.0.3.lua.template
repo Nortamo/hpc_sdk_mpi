@@ -1,0 +1,37 @@
+-- -*- lua -*-
+
+whatis([[Name : openmpi]])
+whatis([[Version : 4.0.3]])
+
+
+-- Services provided by the package
+family("mpi")
+
+-- Loading this module unlocks the path below unconditionally
+prepend_path("MODULEPATH", "_MODULE_ROOT/openmpi")
+
+-- Try to load variables into path to see if providers are there
+
+-- Change MODULEPATH based on the result of the tests above
+
+-- Set variables to notify the provider of the new services
+setenv("LMOD_MPI_NAME", "openmpi")
+setenv("LMOD_MPI_VERSION", "4.0.3")
+local   prog_root = '_STACK_ROOT/openmpi'
+local   ucx_root = '_STACK_ROOT/ucx'
+
+prepend_path("PATH", pathJoin(prog_root,"bin"), ":")
+prepend_path("MANPATH", pathJoin( prog_root, "share/man"), ":")
+prepend_path("LD_LIBRARY_PATH", pathJoin( prog_root, "lib"), ":")
+prepend_path("LIBRARY_PATH", pathJoin( prog_root, "lib"), ":")
+prepend_path("CPATH", pathJoin( prog_root, "include"), ":")
+prepend_path("PKG_CONFIG_PATH", pathJoin( prog_root, "lib/pkgconfig"), ":")
+prepend_path("CMAKE_PREFIX_PATH", prog_root , ":")
+prepend_path("LD_LIBRARY_PATH", "/appl/opt/hcoll/4.5.3045/lib", ":")
+prepend_path("LD_LIBRARY_PATH","_HPC_SDK_ROOT/Linux_x86_64/20.7/cuda/_CUDA_VERSION/lib64/")
+prepend_path("LD_LIBRARY_PATH", pathJoin( ucx_root, "lib/ucx"), ":")
+prepend_path("LD_LIBRARY_PATH", pathJoin( ucx_root, "lib"), ":")
+setenv("OPENMPI_INSTALL_ROOT", prog_root)
+
+setenv("SLURM_MPI_TYPE", "pmix_v2")
+setenv("OMPI_MCA_coll_hcoll_enable", "0")
